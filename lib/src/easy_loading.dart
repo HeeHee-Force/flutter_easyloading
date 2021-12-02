@@ -24,6 +24,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import './widgets/container.dart';
 import './widgets/progress.dart';
@@ -165,7 +166,7 @@ class EasyLoading {
 
   /// background color of loading, only used for [EasyLoadingStyle.custom].
   Color? backgroundColor;
-  
+
   /// boxShadow of loading, only used for [EasyLoadingStyle.custom].
   List<BoxShadow>? boxShadow;
 
@@ -201,8 +202,7 @@ class EasyLoading {
   GlobalKey<EasyLoadingContainerState>? get key => _key;
   GlobalKey<EasyLoadingProgressState>? get progressKey => _progressKey;
 
-  final List<EasyLoadingStatusCallback> _statusCallbacks =
-      <EasyLoadingStatusCallback>[];
+  final List<EasyLoadingStatusCallback> _statusCallbacks = <EasyLoadingStatusCallback>[];
 
   factory EasyLoading() => _instance;
   static final EasyLoading _instance = EasyLoading._internal();
@@ -238,9 +238,31 @@ class EasyLoading {
   }) {
     return (BuildContext context, Widget? child) {
       if (builder != null) {
-        return builder(context, FlutterEasyLoading(child: child));
+        return builder(
+            context,
+            FlutterEasyLoading(
+                child: ResponsiveWrapper.builder(
+              child,
+              maxWidth: 1200,
+              minWidth: 480,
+              defaultScale: true,
+              breakpoints: [
+                ResponsiveBreakpoint.autoScale(400),
+                ResponsiveBreakpoint.autoScale(500),
+              ],
+            )));
       } else {
-        return FlutterEasyLoading(child: child);
+        return FlutterEasyLoading(
+            child: ResponsiveWrapper.builder(
+          child,
+          maxWidth: 1200,
+          minWidth: 480,
+          defaultScale: true,
+          breakpoints: [
+            ResponsiveBreakpoint.autoScale(400),
+            ResponsiveBreakpoint.autoScale(500),
+          ],
+        ));
       }
     };
   }
@@ -281,8 +303,7 @@ class EasyLoading {
 
     if (_instance.w == null || _instance.progressKey == null) {
       if (_instance.key != null) await dismiss(animation: false);
-      GlobalKey<EasyLoadingProgressState> _progressKey =
-          GlobalKey<EasyLoadingProgressState>();
+      GlobalKey<EasyLoadingProgressState> _progressKey = GlobalKey<EasyLoadingProgressState>();
       Widget w = EasyLoadingProgress(
         key: _progressKey,
         value: value,
