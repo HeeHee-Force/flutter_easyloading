@@ -462,35 +462,35 @@ class EasyLoading {
 
     Completer<void> completer = Completer<void>();
     _key = GlobalKey<EasyLoadingContainerState>();
-    _w = ResponsiveWrapper.builder(
-      EasyLoadingContainer(
-        key: _key,
-        status: status,
-        indicator: w,
-        animation: animation,
-        toastPosition: toastPosition,
-        maskType: maskType,
-        dismissOnTap: dismissOnTap,
-        completer: completer,
-      ),
-      maxWidth: 1200,
-      minWidth: 480,
-      defaultScale: true,
-      breakpoints: [
-        ResponsiveBreakpoint.autoScale(400),
-        ResponsiveBreakpoint.autoScale(500),
-      ],
-    );
-    // _w = EasyLoadingContainer(
-    //   key: _key,
-    //   status: status,
-    //   indicator: w,
-    //   animation: animation,
-    //   toastPosition: toastPosition,
-    //   maskType: maskType,
-    //   dismissOnTap: dismissOnTap,
-    //   completer: completer,
+    // _w = ResponsiveWrapper.builder(
+    //   EasyLoadingContainer(
+    //     key: _key,
+    //     status: status,
+    //     indicator: w,
+    //     animation: animation,
+    //     toastPosition: toastPosition,
+    //     maskType: maskType,
+    //     dismissOnTap: dismissOnTap,
+    //     completer: completer,
+    //   ),
+    //   maxWidth: 1200,
+    //   minWidth: 480,
+    //   defaultScale: true,
+    //   breakpoints: [
+    //     ResponsiveBreakpoint.autoScale(400),
+    //     ResponsiveBreakpoint.autoScale(500),
+    //   ],
     // );
+    _w = EasyLoadingContainer(
+      key: _key,
+      status: status,
+      indicator: w,
+      animation: animation,
+      toastPosition: toastPosition,
+      maskType: maskType,
+      dismissOnTap: dismissOnTap,
+      completer: completer,
+    );
     completer.future.whenComplete(() {
       _callback(EasyLoadingStatus.show);
       if (duration != null) {
