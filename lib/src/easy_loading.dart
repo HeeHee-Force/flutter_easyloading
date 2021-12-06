@@ -474,7 +474,7 @@ class EasyLoading {
         completer: completer,
       ),
       maxWidth: 1200,
-      minWidth: 481,
+      minWidth: 480,
       defaultScale: true,
       backgroundColor: Color.fromARGB(0, 255, 255, 255),
       breakpoints: [
